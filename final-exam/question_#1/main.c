@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h>
 
 const char menuDescription[] = "=============================================================\n"
                                "\t\t\t\t\t\t\t MENU\n"
@@ -24,6 +25,11 @@ bool digitCheck(char key[]) {
         }
     }
     return true;
+}
+
+int faktoriyel(int sayi) {
+    if (sayi <= 1) return 1;
+    return sayi * faktoriyel(sayi - 1);
 }
 
 void fibonacciSequenceCalculate() {
@@ -62,12 +68,50 @@ void fibonacciSequenceCalculate() {
     }
 }
 
-void fibonacciCalculate() {
-    printf("fibonacciCalculate");
+void factorialCalculate() {
+    char oddOrEvenNumberinput[255];
+    int numberValue;
+
+    printf("Lütfen bir adet tam sayi giriniz: ");
+    scanf("%s", &oddOrEvenNumberinput);
+
+    while (!digitCheck(oddOrEvenNumberinput)) {
+        printf("Lutfen tam sayi olarak giriş yapiniz!! : ");
+        scanf("%s", &oddOrEvenNumberinput);
+    }
+    numberValue = atoi(oddOrEvenNumberinput); // char value covert to int
+
+    int temp = 1;
+    for (int i = 1; i < numberValue; i++) {
+        temp = i * temp;
+    }
+    printf("Sonuc: %d\n", temp / numberValue + 1);
 }
 
-void fibonacciFormulaCalculate() {
-    printf("fibonacciFormulaCalculate");
+void formulaCalculate() {
+    char oddOrEvenNumberinput[255];
+    int numberValue = 0;
+    int n[3];
+
+
+    for (int i = 0; i < 3; ++i) {
+        if (i == 0) { printf("a: Lütfen bir adet tam sayi giriniz: "); }
+        else if (i == 1) { printf("b: Lütfen bir adet tam sayi giriniz: "); }
+        else if (i == 2) { printf("c: Lütfen bir adet tam sayi giriniz: "); }
+        scanf("%s", &oddOrEvenNumberinput);
+        while (!digitCheck(oddOrEvenNumberinput)) {
+            printf("Lutfen tam sayi olarak giriş yapiniz!! : ");
+            scanf("%s", &oddOrEvenNumberinput);
+        }
+        numberValue = atoi(oddOrEvenNumberinput); // char value covert to int
+        n[i] = numberValue;
+    }
+
+    int a=n[0], b=n[1], c=n[2];
+    int temp = b * b - 4 * a * c;
+    int sqrt_result = sqrt(temp);
+    temp = sqrt_result - b;
+    printf("Formul Hesap Sonucu: %d\n", temp / 2 * b);
 }
 
 void menu() {
@@ -85,11 +129,11 @@ void menu() {
                 choice = 0;
                 break;
             case 2:
-                fibonacciCalculate();
+                factorialCalculate();
                 choice = 0;
                 break;
             case 3:
-                fibonacciFormulaCalculate();
+                formulaCalculate();
                 choice = 0;
                 break;
             case -1:
